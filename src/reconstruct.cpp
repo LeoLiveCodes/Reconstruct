@@ -9,7 +9,7 @@
 using namespace cv;
 
 int main() {
-    Reconstructor r;
+    Reconstructor* r = new Reconstructor();
     string filename = "SampleVideo_1280x720_1mb.mp4";
     VideoCapture capture(filename);
     Mat frame;
@@ -22,7 +22,8 @@ int main() {
         capture >> frame;
         if(frame.empty())
             break;
-        r.addImg(frame);
+        r->addImg(frame);
     }
-    r.match();
+    r->reconstruct();
 }
+

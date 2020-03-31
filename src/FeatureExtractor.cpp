@@ -13,7 +13,6 @@ FeatureExtractor::FeatureExtractor() {
 }
 
 void FeatureExtractor::extract(const Mat& img) {
-   if (keypoints.size() > 1) return;
    Ptr<SIFT> sift = SIFT::create();
    vector<KeyPoint> kp;
    Mat desc;
@@ -22,7 +21,7 @@ void FeatureExtractor::extract(const Mat& img) {
    descriptors.push_back(desc);
 }
 
-std::vector<std::vector<KeyPoint>> FeatureExtractor::get_keypoints() {
+vector<vector<KeyPoint>> FeatureExtractor::get_keypoints() {
     return keypoints;
 }
 
