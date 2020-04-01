@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 project(3DReconstruct)
 
 # add the executable
-add_executable(reconstruct src/reconstruct.cpp src/Reconstructor.cpp src/FeatureExtractor.cpp src/Matching.cpp src/Verifier.cpp src/SceneGraph.cpp)
+add_executable(reconstruct src/reconstruct.cpp src/Reconstructor.cpp src/FeatureExtractor.cpp src/SceneGraph.cpp src/Initializer.cpp src/KeyFrame.cpp)
 
 find_package( OpenCV REQUIRED )
 include_directories(

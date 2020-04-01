@@ -21,10 +21,10 @@ void FeatureExtractor::extract(const Mat& img) {
    descriptors.push_back(desc);
 }
 
-vector<vector<KeyPoint>> FeatureExtractor::get_keypoints() {
+vector<vector<KeyPoint>> FeatureExtractor::get_keypoints() const {
     return keypoints;
 }
 
-std::vector<Mat> FeatureExtractor::get_descriptors() {
+std::vector<Mat> FeatureExtractor::get_descriptors() const {
     return descriptors;
 }

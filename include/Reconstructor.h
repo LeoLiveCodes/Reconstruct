@@ -3,8 +3,8 @@
 
 #include <opencv2/core.hpp>
 #include "FeatureExtractor.h"
-#include "Matching.h"
-#include "Verifier.h"
+#include "KeyFrame.h"
+#include "Initializer.h"
 
 using namespace std;
 using namespace cv;
@@ -20,10 +20,8 @@ public:
     void reconstruct();
     
 private:
-    std::vector<Mat> images;
-    FeatureExtractor* extractor;
-    Matching* matching;
-    Verifier* verifier;
+    std::vector<KeyFrame> keyframes;
+    Initializer* init;
 };
 
 #endif

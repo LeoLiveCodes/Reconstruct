@@ -11,8 +11,8 @@ public:
     FeatureExtractor();
 
     void extract(const Mat& img);
-    vector<vector<KeyPoint>> get_keypoints();
-    vector<Mat> get_descriptors();
+    vector<vector<KeyPoint>> get_keypoints() const;
+    vector<Mat> get_descriptors() const;
 
 private:
     vector<vector<KeyPoint>> keypoints;
