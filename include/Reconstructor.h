@@ -2,7 +2,6 @@
 #define RECONSTRUCTOR_H
 
 #include <opencv2/core.hpp>
-#include "FeatureExtractor.h"
 #include "KeyFrame.h"
 #include "Initializer.h"
 
