@@ -42,6 +42,8 @@ void Reconstructor::reconstruct() {
     vector<pair<vector<KeyPoint>,vector<KeyPoint>>> keypoint_pairs;
     vector<vector<DMatch>> image_pair_matches;
     SceneGraph* graph = new SceneGraph(keyframes.size());
+
+    //TODO: instead of matching every image, use sequential image pairings
     for (int i = 0; i < keyframes.size()-1; ++i) {
         for (int j = i+1; j < keyframes.size(); ++j) {
             Mat desc1 = keyframes.at(i).get_desc();
