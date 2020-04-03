@@ -43,11 +43,12 @@ void Reconstructor::reconstruct() {
     vector<vector<DMatch>> image_pair_matches;
     SceneGraph* graph = new SceneGraph(keyframes.size());
 
-    //TODO: instead of matching every image, use sequential image pairings
-    for (int i = 0; i < keyframes.size()-1; ++i) {
-        for (int j = i+1; j < keyframes.size(); ++j) {
+    for (int i = 0; i < keyframes.size(); ++i) {        
+        for (int k = i+1; k < 3; ++k) {
+            if ((i+k) >= keyframes.size()) continue;
+            int j = i+k;
             Mat desc1 = keyframes.at(i).get_desc();
-            Mat desc2 = keyframes.at(i).get_desc();
+            Mat desc2 = keyframes.at(j).get_desc();
             Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create(DescriptorMatcher::FLANNBASED);
             vector<DMatch> matches;
             matcher->match(desc1, desc2, matches);
@@ -79,6 +80,11 @@ void Reconstructor::reconstruct() {
             }
         }
     }
-    Mat K;
-    init = new Initializer(*graph, K, keyframes);
+
+    // Find initial image pair
+    Mat im1, im2;
+    im1 = keyframes.at(1);
+    im2 = keyframes.at(2);
+    
+
 }
