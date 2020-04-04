@@ -28,7 +28,7 @@ Reconstructor::~Reconstructor() {
 }
 
 void Reconstructor::addImg(Mat& frame) {
-    // if (keyframes.size() > 10) return;
+    if (keyframes.size() > 10) return;
     
     // convert to grayscale
     Mat gray;
