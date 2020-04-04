@@ -28,7 +28,7 @@ Reconstructor::~Reconstructor() {
 }
 
 void Reconstructor::addImg(Mat& frame) {
-    if (keyframes.size() > 3) return;
+    // if (keyframes.size() > 10) return;
     
     // convert to grayscale
     Mat gray;
@@ -39,12 +39,13 @@ void Reconstructor::addImg(Mat& frame) {
 }
 
 void Reconstructor::reconstruct() {
+    cout << keyframes.size() << " total images" << endl;
     vector<pair<vector<KeyPoint>,vector<KeyPoint>>> keypoint_pairs;
     vector<vector<DMatch>> image_pair_matches;
     SceneGraph* graph = new SceneGraph(keyframes.size());
 
     for (int i = 0; i < keyframes.size(); ++i) {        
-        for (int k = i+1; k < 3; ++k) {
+        for (int k = 1; k < 3; ++k) {
             if ((i+k) >= keyframes.size()) continue;
             int j = i+k;
             Mat desc1 = keyframes.at(i).get_desc();
@@ -80,11 +81,33 @@ void Reconstructor::reconstruct() {
             }
         }
     }
-
-    // Find initial image pair
-    Mat im1, im2;
-    im1 = keyframes.at(1);
-    im2 = keyframes.at(2);
     
-
+    cout << "Finding initial image pair..." << endl;
+    // find initial image pair
+    pair<int,int> initial_image_pair;
+    // get all images with correspondences
+    vector<KeyFrame> images_with_corr;
+    vector<int> img1_idx;
+    graph->GetNodesWithMatches(img1_idx);
+    cout << img1_idx.size() << " images with matches" << endl;
+    bool flag = false;
+    for (const auto &idx1 : img1_idx) {
+        KeyFrame &im1 = keyframes.at(idx1);
+        // get all matches
+        list<int> img2_idx = graph->GetImageMatches(idx1);
+        cout << "Image " << idx1 << " has " << img2_idx.size() << " matches." << endl;
+        for (const auto &idx2 : img2_idx) {
+            KeyFrame &im2 = keyframes.at(idx2);
+            // Check im1, im2 pair for initialization
+            // ...
+            initial_image_pair = make_pair(idx1,idx2);
+            flag = true;
+            break;
+        }
+        if (flag == true)
+            break;
+    }
+    cout << "Initial image pair: (" << initial_image_pair.first << ", " << initial_image_pair.second << ")" << endl;
+    
+    // Initialize using initial_image_pair
 }

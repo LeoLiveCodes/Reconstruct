@@ -21,6 +21,7 @@ public:
 private:
     std::vector<KeyFrame> keyframes;
     Initializer* init;
+
 };
 
 #endif

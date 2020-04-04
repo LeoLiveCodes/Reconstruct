@@ -16,7 +16,8 @@ int main() {
 
     if( !capture.isOpened() )
         throw "Error when reading steam_avi";
-
+    
+    std::cout << "Extracting features..." << std::endl;
     for( ; ; )
     {
         capture >> frame;
@@ -24,6 +25,7 @@ int main() {
             break;
         r->addImg(frame);
     }
+    std::cout << "Starting reconstruction..." << std::endl;
     r->reconstruct();
 }
 
